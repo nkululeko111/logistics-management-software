@@ -1,7 +1,7 @@
 "use client"
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "react-hot-toast";
 import { Navigation } from "./components/navigation";
 import { ProductList } from "./components/product-list";
 import { AddProduct } from "./components/add-product";

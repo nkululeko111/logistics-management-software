@@ -11,6 +11,7 @@ import {
   Alert,
   CircularProgress
 } from '@mui/material';
+import { supabase } from '../../supabaseClient'; 
 
 export function ResetPassword() {
   const [password, setPassword] = useState('');
@@ -53,11 +54,19 @@ export function ResetPassword() {
     try {
       setError('');
       setLoading(true);
-      await updatePassword(password);
+      
+      // Update password in Supabase
+      const { error } = await supabase.auth.updateUser({
+        password: password
+      });
+      
+      if (error) throw error;
+      
       setMessage('Password updated successfully');
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
       setError('Failed to update password: ' + err.message);
+    } finally {
       setLoading(false);
     }
   }
